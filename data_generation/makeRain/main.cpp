@@ -16,7 +16,7 @@ void getFiles(const string &pattern, vector<string> &filePath);
 int main(int argc, char** argv) {
     map<string, double> params;
     vector<string> imgPath;
-    getFiles(argv[0], imgPath);
+    getFiles(str(format("%1%/*/*/*.png")%argv[0]), imgPath);
 
     //getFiles("repo/dataset/cityscapes/leftImage/"
     //        "train/*/*.png", imgPath);
