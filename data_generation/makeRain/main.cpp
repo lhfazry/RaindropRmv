@@ -59,21 +59,25 @@ int main(int argc, char** argv) {
 
         cv::Mat img;
 
-        cout << "resize" << endl;
+        cout << "resize rain.image" << endl;
         cv::resize(rain.image, img, cv::Size(new_width, new_height), cv::INTER_NEAREST);
         cv::imwrite(str(format("%1%/%2%_I.png")%savePath%index), img);
 //        cv::imshow("test_show input", img);
 
-        cout << "render" << endl;
         for(int i{0}; i < numsPerImg; i++) {
+
+            cout << "render" << endl;
             rain.render();      
             cv::Mat rain_img;
+
+            cout << "render rain.rain_image" << endl;
             cv::resize(rain.rain_image, rain_img, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_I.png")%savePath%index), img);
 //            cv::imshow("test_show rain", rain_img);
             auto kernel = rain.get_kernel(random_dia(rng));
             rain.blur(kernel);
 
+            cout << "render rain.mask" << endl;
             cv::Mat mask, blur;
             cv::resize(rain.mask, mask, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::resize(rain.blur_image, blur, cv::Size(new_width, new_height), cv::INTER_NEAREST);
