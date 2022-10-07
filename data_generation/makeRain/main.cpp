@@ -59,10 +59,12 @@ int main(int argc, char** argv) {
 
         cv::Mat img;
 
+        cout << "resize" << endl;
         cv::resize(rain.image, img, cv::Size(new_width, new_height), cv::INTER_NEAREST);
         cv::imwrite(str(format("%1%/%2%_I.png")%savePath%index), img);
 //        cv::imshow("test_show input", img);
 
+        cout << "render" << endl;
         for(int i{0}; i < numsPerImg; i++) {
             rain.render();      
             cv::Mat rain_img;
@@ -74,7 +76,7 @@ int main(int argc, char** argv) {
 
             cv::Mat mask, blur;
             cv::resize(rain.mask, mask, cv::Size(new_width, new_height), cv::INTER_NEAREST);
-            cv::resize(rain.blur_image, blur, cv::Size(new_width, new_height));
+            cv::resize(rain.blur_image, blur, cv::Size(new_width, new_height), cv::INTER_NEAREST);
 
             cv::imwrite(str(format("%1%/%2%_%3%_M.png")%savePath%index%count), mask);
             cv::imwrite(str(format("%1%/%2%_%3%_B.png")%savePath%index%count), blur);
