@@ -94,6 +94,7 @@ int main(int argc, char** argv) {
             std::string path_sem_seg_color = std::regex_replace(path_sem, regex(R"(leftImg8bit)"), "gtFine_color");
             // std::cout << path_sem_seg << std::endl;
             // std::cout << path_sem_seg_color << std::endl;
+            cout << "read path_sem_seg: " << path_sem_seg << endl;
             cv::Mat sem = cv::imread(path_sem_seg, -1);
             cv::Mat sem_save;
 
