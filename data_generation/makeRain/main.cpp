@@ -89,9 +89,9 @@ int main(int argc, char** argv) {
             
             cout << str(format("imgPath[%1%] = %2%")%index%imgPath[index]) << endl;
             std::string path_sem = std::regex_replace(imgPath[index], regex(R"(leftImg8bit)"), "gtFine");
-            std::string path_sem_seg = std::regex_replace(path_sem, regex(R"(leftImg8bit)"), "gtFine_labelIds");
-            std::string path_ins_seg = std::regex_replace(path_sem, regex(R"(leftImg8bit)"), "gtFine_instanceIds");
-            std::string path_sem_seg_color = std::regex_replace(path_sem, regex(R"(leftImg8bit)"), "gtFine_color");
+            std::string path_sem_seg = std::regex_replace(path_sem, regex(R"(gtFine_)"), "gtFine_labelIds");
+            std::string path_ins_seg = std::regex_replace(path_sem, regex(R"(gtFine_)"), "gtFine_instanceIds");
+            std::string path_sem_seg_color = std::regex_replace(path_sem, regex(R"(gtFine_)"), "gtFine_color");
             // std::cout << path_sem_seg << std::endl;
             // std::cout << path_sem_seg_color << std::endl;
             cout << "read path_sem_seg: " << path_sem_seg << endl;
