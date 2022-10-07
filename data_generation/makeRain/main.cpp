@@ -65,56 +65,55 @@ int main(int argc, char** argv) {
 //        cv::imshow("test_show input", img);
 
         for(int i{0}; i < numsPerImg; i++) {
-
-            cout << "render" << endl;
+            // cout << "render" << endl;
             rain.render();      
             cv::Mat rain_img;
 
-            cout << str(format("resize rain.rain_image, original: h: %1%, w: %2%")%rain.rain_image.rows%rain.rain_image.cols) << endl;
+            // cout << str(format("resize rain.rain_image, original: h: %1%, w: %2%")%rain.rain_image.rows%rain.rain_image.cols) << endl;
             cv::resize(rain.rain_image, rain_img, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_I.png")%savePath%index), img);
 //            cv::imshow("test_show rain", rain_img);
             auto kernel = rain.get_kernel(random_dia(rng));
             rain.blur(kernel);
 
-            cout << str(format("resize rain.mask, original: h: %1%, w: %2%")%rain.mask.rows%rain.mask.cols) << endl;
+            // cout << str(format("resize rain.mask, original: h: %1%, w: %2%")%rain.mask.rows%rain.mask.cols) << endl;
             cv::Mat mask, blur;
             cv::resize(rain.mask, mask, cv::Size(new_width, new_height), cv::INTER_NEAREST);
 
-            cout << str(format("resize rain.blur_image, original: h: %1%, w: %2%")%rain.blur_image.rows%rain.blur_image.cols) << endl;
+            // cout << str(format("resize rain.blur_image, original: h: %1%, w: %2%")%rain.blur_image.rows%rain.blur_image.cols) << endl;
             cv::resize(rain.blur_image, blur, cv::Size(new_width, new_height), cv::INTER_NEAREST);
 
             cv::imwrite(str(format("%1%/%2%_%3%_M.png")%savePath%index%count), mask);
             cv::imwrite(str(format("%1%/%2%_%3%_B.png")%savePath%index%count), blur);
             
-            cout << str(format("imgPath[%1%] = %2%")%index%imgPath[index]) << endl;
+            // cout << str(format("imgPath[%1%] = %2%")%index%imgPath[index]) << endl;
             std::string path_sem = std::regex_replace(imgPath[index], regex(R"(leftImg8bit)"), "gtFine");
             std::string path_sem_seg = std::regex_replace(path_sem, regex(R"(_gtFine)"), "_gtFine_labelIds");
             std::string path_ins_seg = std::regex_replace(path_sem, regex(R"(_gtFine)"), "_gtFine_instanceIds");
             std::string path_sem_seg_color = std::regex_replace(path_sem, regex(R"(_gtFine)"), "_gtFine_color");
             // std::cout << path_sem_seg << std::endl;
             // std::cout << path_sem_seg_color << std::endl;
-            cout << "path_sem: " << path_sem << endl;
-            cout << "path_sem_seg: " << path_sem_seg << endl;
-            cout << "path_ins_seg: " << path_ins_seg << endl;
-            cout << "path_sem_seg_color: " << path_sem_seg_color << endl;
+            // cout << "path_sem: " << path_sem << endl;
+            // cout << "path_sem_seg: " << path_sem_seg << endl;
+            // cout << "path_ins_seg: " << path_ins_seg << endl;
+            // cout << "path_sem_seg_color: " << path_sem_seg_color << endl;
 
             cv::Mat sem = cv::imread(path_sem_seg, -1);
             cv::Mat sem_save;
 
-            cout << str(format("resize sem, original: h: %1%, w: %2%")%sem.rows%sem.cols) << endl;
+            // cout << str(format("resize sem, original: h: %1%, w: %2%")%sem.rows%sem.cols) << endl;
             cv::resize(sem, sem_save, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_%3%_S.png")%savePath%index%count), sem_save);
             sem = cv::imread(path_sem_seg_color);
             sem_save;
 
-            cout << str(format("resize sem, original: h: %1%, w: %2%")%sem.rows%sem.cols) << endl;
+            // cout << str(format("resize sem, original: h: %1%, w: %2%")%sem.rows%sem.cols) << endl;
             cv::resize(sem, sem_save, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_%3%_S_color.png")%savePath%index%count), sem_save);
             sem = cv::imread(path_ins_seg, -1);
             sem_save;
 
-            cout << str(format("resize sem, original: h: %1%, w: %2%")%sem.rows%sem.cols) << endl;
+            // cout << str(format("resize sem, original: h: %1%, w: %2%")%sem.rows%sem.cols) << endl;
             cv::resize(sem, sem_save, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_%3%_Ins.png")%savePath%index%count), sem_save);
 //            cv::imshow("test show mask", mask);
