@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 
         cv::Mat img;
 
-        cout << "resize rain.image" << endl;
+        cout << str(format("resize rain.image, original: h: %1%, w: %2%")%rain.image.rows%rain.image.cols) << endl;
         cv::resize(rain.image, img, cv::Size(new_width, new_height), cv::INTER_NEAREST);
         cv::imwrite(str(format("%1%/%2%_I.png")%savePath%index), img);
 //        cv::imshow("test_show input", img);
@@ -70,18 +70,18 @@ int main(int argc, char** argv) {
             rain.render();      
             cv::Mat rain_img;
 
-            cout << "resize rain.rain_image" << endl;
+            cout << str(format("resize rain.rain_image, original: h: %1%, w: %2%")%rain.rain_image.rows%rain.rain_image.cols) << endl;
             cv::resize(rain.rain_image, rain_img, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_I.png")%savePath%index), img);
 //            cv::imshow("test_show rain", rain_img);
             auto kernel = rain.get_kernel(random_dia(rng));
             rain.blur(kernel);
 
-            cout << "resize rain.mask" << endl;
+            cout << str(format("resize rain.mask, original: h: %1%, w: %2%")%rain.mask.rows%rain.mask.cols) << endl;
             cv::Mat mask, blur;
             cv::resize(rain.mask, mask, cv::Size(new_width, new_height), cv::INTER_NEAREST);
 
-            cout << "resize rain.blur" << endl;
+            cout << str(format("resize rain.blur_image, original: h: %1%, w: %2%")%rain.blur_image.rows%rain.blur_image.cols) << endl;
             cv::resize(rain.blur_image, blur, cv::Size(new_width, new_height), cv::INTER_NEAREST);
 
             cv::imwrite(str(format("%1%/%2%_%3%_M.png")%savePath%index%count), mask);
