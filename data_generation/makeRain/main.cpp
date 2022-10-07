@@ -16,7 +16,7 @@ void getFiles(const string &pattern, vector<string> &filePath);
 int main(int argc, char** argv) {
     map<string, double> params;
     vector<string> imgPath;
-    getFiles(str(format("%1%/*/*/*.png")%argv[0]), imgPath);
+    getFiles(str(format("%1%/*/*/*.png")%argv[1]), imgPath);
 
     //getFiles("repo/dataset/cityscapes/leftImage/"
     //        "train/*/*.png", imgPath);
@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
     uniform_int_distribution<int> random_psi(30, 45);
     uniform_int_distribution<int> random_dia(3, 20);   // blur kernel size
 
-    string savePath{argv[1]};
+    string savePath{argv[2]};
 
     for(int index{0}; index < totalIndex; ++index) {
         if(index % 10 == 0) {
