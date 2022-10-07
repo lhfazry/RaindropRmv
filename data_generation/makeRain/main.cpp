@@ -70,16 +70,18 @@ int main(int argc, char** argv) {
             rain.render();      
             cv::Mat rain_img;
 
-            cout << "render rain.rain_image" << endl;
+            cout << "resize rain.rain_image" << endl;
             cv::resize(rain.rain_image, rain_img, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_I.png")%savePath%index), img);
 //            cv::imshow("test_show rain", rain_img);
             auto kernel = rain.get_kernel(random_dia(rng));
             rain.blur(kernel);
 
-            cout << "render rain.mask" << endl;
+            cout << "resize rain.mask" << endl;
             cv::Mat mask, blur;
             cv::resize(rain.mask, mask, cv::Size(new_width, new_height), cv::INTER_NEAREST);
+
+            cout << "resize rain.blur" << endl;
             cv::resize(rain.blur_image, blur, cv::Size(new_width, new_height), cv::INTER_NEAREST);
 
             cv::imwrite(str(format("%1%/%2%_%3%_M.png")%savePath%index%count), mask);
