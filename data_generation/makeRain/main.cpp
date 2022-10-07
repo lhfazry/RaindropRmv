@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
             cv::imwrite(str(format("%1%/%2%_%3%_M.png")%savePath%index%count), mask);
             cv::imwrite(str(format("%1%/%2%_%3%_B.png")%savePath%index%count), blur);
 
-            std::string path_sem = std::regex_replace(imgPath[index], regex(R"(leftImage)"), "gtFine");
+            std::string path_sem = std::regex_replace(imgPath[index], regex(R"(leftImg8bit)"), "gtFine");
             std::string path_sem_seg = std::regex_replace(path_sem, regex(R"(leftImg8bit)"), "gtFine_labelIds");
             std::string path_ins_seg = std::regex_replace(path_sem, regex(R"(leftImg8bit)"), "gtFine_instanceIds");
             std::string path_sem_seg_color = std::regex_replace(path_sem, regex(R"(leftImg8bit)"), "gtFine_color");
