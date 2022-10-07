@@ -12,6 +12,8 @@ using boost::str;
 
 
 void getFiles(const string &pattern, vector<string> &filePath);
+int new_width = 128;
+int new_height = 128;
 
 int main(int argc, char** argv) {
     map<string, double> params;
@@ -57,22 +59,22 @@ int main(int argc, char** argv) {
 
         cv::Mat img;
 
-        cv::resize(rain.image, img, cv::Size(), 0.25, 0.25);
+        cv::resize(rain.image, img, cv::Size(new_width, new_height), cv::INTER_NEAREST);
         cv::imwrite(str(format("%1%/%2%_I.png")%savePath%index), img);
 //        cv::imshow("test_show input", img);
 
         for(int i{0}; i < numsPerImg; i++) {
             rain.render();      
             cv::Mat rain_img;
-            cv::resize(rain.rain_image, rain_img, cv::Size(), 0.25, 0.25);
+            cv::resize(rain.rain_image, rain_img, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_I.png")%savePath%index), img);
 //            cv::imshow("test_show rain", rain_img);
             auto kernel = rain.get_kernel(random_dia(rng));
             rain.blur(kernel);
 
             cv::Mat mask, blur;
-            cv::resize(rain.mask, mask, cv::Size(), 0.25, 0.25, cv::INTER_NEAREST);
-            cv::resize(rain.blur_image, blur, cv::Size(), 0.25, 0.25);
+            cv::resize(rain.mask, mask, cv::Size(new_width, new_height), cv::INTER_NEAREST);
+            cv::resize(rain.blur_image, blur, cv::Size(new_width, new_height));
 
             cv::imwrite(str(format("%1%/%2%_%3%_M.png")%savePath%index%count), mask);
             cv::imwrite(str(format("%1%/%2%_%3%_B.png")%savePath%index%count), blur);
@@ -85,15 +87,15 @@ int main(int argc, char** argv) {
             // std::cout << path_sem_seg_color << std::endl;
             cv::Mat sem = cv::imread(path_sem_seg, -1);
             cv::Mat sem_save;
-            cv::resize(sem, sem_save, cv::Size(), 0.25, 0.25, cv::INTER_NEAREST);
+            cv::resize(sem, sem_save, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_%3%_S.png")%savePath%index%count), sem_save);
             sem = cv::imread(path_sem_seg_color);
             sem_save;
-            cv::resize(sem, sem_save, cv::Size(), 0.25, 0.25, cv::INTER_NEAREST);
+            cv::resize(sem, sem_save, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_%3%_S_color.png")%savePath%index%count), sem_save);
             sem = cv::imread(path_ins_seg, -1);
             sem_save;
-            cv::resize(sem, sem_save, cv::Size(), 0.25, 0.25, cv::INTER_NEAREST);
+            cv::resize(sem, sem_save, cv::Size(new_width, new_height), cv::INTER_NEAREST);
             cv::imwrite(str(format("%1%/%2%_%3%_Ins.png")%savePath%index%count), sem_save);
 //            cv::imshow("test show mask", mask);
 //            cv::imshow("test show blur", blur);

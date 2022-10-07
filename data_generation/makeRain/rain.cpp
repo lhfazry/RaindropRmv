@@ -25,13 +25,10 @@ Mat<double> Rain::get_intrinsic(const string &image_path) {
     cout << "image path " << image_path << endl;
     string json_path;
     json_path = regex_replace(image_path, regex(R"(leftImg8bit)"), "camera");
-    cout << "json path 1 " << json_path << endl;
-
-    json_path = regex_replace(json_path, regex(R"(leftImg8bit.png$)"), "camera.json");
-    cout << "json path 2 " << json_path << endl;
-
+    //cout << "json path 1 " << json_path << endl;
+    
     json_path = regex_replace(json_path, regex(R"(.png$)"), ".json");
-    cout << "json path 3 " << json_path << endl;
+    //cout << "json path 3 " << json_path << endl;
 
     ifstream stream(json_path, ifstream::binary);
     Json::Value root;
